@@ -108,11 +108,9 @@ public class MessageEncrypt extends Application {
 
         if (!input.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
             if (!salt.equalsIgnoreCase(""))
-//                output = stringDecrypt(input, password, salt);
-                output = "This is the test file that will be encrypted!";
+                output = stringDecrypt(input, password, salt);
             else
-//                output = stringDecrypt(input, password);
-            output = "This is the test file that will be encrypted!";
+                output = stringDecrypt(input, password);
             outputDecrypt.setText(output);
             out.println(output);
         }
