@@ -21,5 +21,5 @@ public interface Crypto {
 
     String encryptString(final KeyFile key) throws Exception;
 
-    String decryptString(final KeyFile key) throws Exception;
+    String decryptString(String in, final KeyFile key) throws Exception;
 }

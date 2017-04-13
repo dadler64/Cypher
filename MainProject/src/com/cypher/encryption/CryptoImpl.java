@@ -92,9 +92,9 @@ public class CryptoImpl implements Crypto{
      * @return
      * @throws Exception For any of the many exceptions that could be thrown
      */
-    public String decryptString(final KeyFile key) throws Exception {
-        data = Base64.getDecoder().decode(str);
-//        data = str.getBytes();
+    public String decryptString(String in, final KeyFile key) throws Exception {
+        // NOTE: decrypting was fixed by introducing String 'in' as a parameter
+        data = Base64.getDecoder().decode(in);
         cipher = Cipher.getInstance(encryptionMethod);
         ivspec = new IvParameterSpec(iv);
         cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec);

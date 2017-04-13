@@ -16,9 +16,10 @@ public class Test {
     private static final String password = "1234567812345678";
     private static final String salt = "wTmg4qj8dNszs2ji";
     private static final String str = "test";
+    private static final String a = null;
+
 
     private static String encrypted;
-    private static String decrypted;
     private static String temp;
 
     public static void main(String... args) throws Exception {
@@ -39,8 +40,8 @@ public class Test {
 
     // TEST DECRYPTION
     private static void testStringDecrypt() throws Exception{
-        decrypted = cryptoImpl.decryptString(keyFile);
+        String decrypted = cryptoImpl.decryptString(encrypted, keyFile);
 
-        err.printf("%n[DEBUG] <Test> Decrypted String: %s%n", encrypted);
+        err.printf("%n[DEBUG] <Test> Decrypted String: %s%n", decrypted);
     }
 }

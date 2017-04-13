@@ -17,13 +17,10 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileWriter;
-import java.security.Key;
 import java.util.Scanner;
 
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 
@@ -41,8 +38,6 @@ public class MessageEncrypt extends Application {
 
     private static KeyFile keyFile;
     private static CryptoImpl cryptoImpl;
-    private String password;
-    private static Key key = new SecretKeySpec("pass".getBytes(), "AES");
 
     public static void main(String[] args) {
         launch(args);
@@ -71,11 +66,11 @@ public class MessageEncrypt extends Application {
     }
 
     private static String stringDecrypt(String str, String password) throws Exception {
-        return cryptoImpl.decryptString(keyFile);
+        return cryptoImpl.decryptString(str, keyFile);
     }
 
     private static String stringDecrypt(String str, String password, String salt) throws Exception {
-        return cryptoImpl.decryptString(keyFile);
+        return cryptoImpl.decryptString(str, keyFile);
     }
 
     public void encrypt() throws Exception {
