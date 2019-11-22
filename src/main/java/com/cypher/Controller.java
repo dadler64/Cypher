@@ -1,34 +1,21 @@
 package com.cypher;
 
-/**
- * Created by adlerd on 3/2/17.
- */
-import com.cypher.encryption.CryptoImpl;
+import static java.lang.System.out;
+
+import com.cypher.encryption.CryptoImplementation;
 import com.cypher.encryption.KeyFile;
-
-import javafx.application.Application;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
-
-import static java.lang.System.out;
-
+import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 @SuppressWarnings("Duplicates")
-public class MessageEncrypt extends Application {
+public class Controller {
 
-    @FXML
-    private Button buttonDecrypt, buttonEncrypt, buttonLoadDecrypt, buttonLoadEncrypt, buttonSaveDecrypt, buttonSaveEncrypt;
     @FXML
     private TextArea inputDecrypt, inputEncrypt, outputDecrypt, outputEncrypt;
     @FXML
@@ -37,40 +24,27 @@ public class MessageEncrypt extends Application {
     private PasswordField passwordDecrypt, passwordEncrypt;
 
     private static KeyFile keyFile;
-    private static CryptoImpl cryptoImpl;
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent page = FXMLLoader.load(getClass().getResource("MessageEncrypt.fxml"));
-        Scene scene = new Scene(page);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Encrypt");
-        primaryStage.show();
-    }
+    private static CryptoImplementation cryptoImplementation;
 
     private static String stringEncrypt(String str, String password) throws Exception {
-        cryptoImpl = new CryptoImpl(str);
+        cryptoImplementation = new CryptoImplementation(str);
         keyFile = new KeyFile(password, 1);
-        return cryptoImpl.encryptString(keyFile);
+        return cryptoImplementation.encryptString(keyFile);
     }
 
     private static String stringEncrypt(String str, String password, String salt) throws Exception {
-        cryptoImpl = new CryptoImpl(str);
+        cryptoImplementation = new CryptoImplementation(str);
         keyFile = new KeyFile(password, 1);
         keyFile.setSalt(salt);
-        return cryptoImpl.encryptString(keyFile);
+        return cryptoImplementation.encryptString(keyFile);
     }
 
     private static String stringDecrypt(String str, String password) throws Exception {
-        return cryptoImpl.decryptString(str, keyFile);
+        return cryptoImplementation.decryptString(str, keyFile);
     }
 
     private static String stringDecrypt(String str, String password, String salt) throws Exception {
-        return cryptoImpl.decryptString(str, keyFile);
+        return cryptoImplementation.decryptString(str, keyFile);
     }
 
     public void encrypt() throws Exception {
@@ -80,7 +54,7 @@ public class MessageEncrypt extends Application {
         String salt = saltEncrypt.getText();
         String output;
 
-//        out.printf("[DEBUG] Input: %s%n", input);
+        out.printf("[DEBUG] Encrypt input: %s%n", input);
 
         if (!input.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
             if (!salt.equalsIgnoreCase(""))
@@ -99,7 +73,7 @@ public class MessageEncrypt extends Application {
         String salt = saltDecrypt.getText();
         String output;
 
-//        out.printf("[DEBUG] Input: %s%n", input);
+        out.printf("[DEBUG] Decrypt input: %s%n", input);
 
         if (!input.equalsIgnoreCase("") && !password.equalsIgnoreCase("")) {
             if (!salt.equalsIgnoreCase(""))
@@ -119,7 +93,6 @@ public class MessageEncrypt extends Application {
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
-
             out.printf("[DEBUG] File selected: %s%n", selectedFile.getName());
         }
         else {
@@ -140,9 +113,9 @@ public class MessageEncrypt extends Application {
 
     public void encryptSaveFile() throws Exception{
 
-        FileChooser fileChooser2 = new FileChooser();
-        fileChooser2.setTitle("Save File");
-        File saveFile = fileChooser2.showSaveDialog(null);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        File saveFile = fileChooser.showSaveDialog(null);
 
 
         if (saveFile != null) {
@@ -176,7 +149,7 @@ public class MessageEncrypt extends Application {
         else {
             out.printf("[DEBUG] No file selected%n");
         }
-        //clears textbox and starts reading in text from file
+        // Clears textbox and starts reading in text from file
         inputDecrypt.setText("");
         assert selectedFile != null;
         Scanner read = new Scanner(selectedFile);
@@ -190,9 +163,9 @@ public class MessageEncrypt extends Application {
 
     public void decryptSaveFile() throws Exception{
 
-        FileChooser fileChooser2 = new FileChooser();
-        fileChooser2.setTitle("Save File");
-        File saveFile = fileChooser2.showSaveDialog(null);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File");
+        File saveFile = fileChooser.showSaveDialog(null);
 
 
         if (saveFile != null) {
@@ -211,4 +184,5 @@ public class MessageEncrypt extends Application {
 
 
     }
+
 }

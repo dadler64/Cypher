@@ -4,16 +4,15 @@ package com.cypher.encryption;
  * Created by adlerd on 3/2/17.
  */
 
-import com.cypher.utils.FileUtil;
+import static java.lang.System.err;
+import static java.lang.System.out;
 
+import com.cypher.utils.FileUtil;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-import static java.lang.System.*;
-
-@SuppressWarnings("ALL")
 public class KeyFile {
     private String rawKey;
     private String salt; // MUST be 128 bits (16 characters)
@@ -62,7 +61,7 @@ public class KeyFile {
     }
 
     // For catching the 'NoSuchAlgorithmException'
-    String wrappedKey() {
+    public String wrappedKey() {
         try {
             return getKey();
         } catch (NoSuchAlgorithmException e) {

@@ -10,9 +10,6 @@ import java.io.IOException;
 public class FileUtil {
     public static void writeToFile(byte[] bytes, File file) throws IOException{
         final FileOutputStream outputStream = new FileOutputStream(file);
-//        for(byte b : bytes) {
-//            outputStream.write(b);
-//        }
         outputStream.write(bytes);
     }
 }

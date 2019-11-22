@@ -1,18 +1,16 @@
-package com.cypher.encryption.test;
-
 /**
  * Created by adlerd on 3/2/17.
  */
 
-import com.cypher.encryption.CryptoImpl;
-import com.cypher.encryption.KeyFile;
+import static java.lang.System.err;
 
-import static java.lang.System.*;
+import com.cypher.encryption.CryptoImplementation;
+import com.cypher.encryption.KeyFile;
 
 @SuppressWarnings("Duplicates")
 public class Test {
     private static KeyFile keyFile;
-    private static CryptoImpl cryptoImpl;
+    private static CryptoImplementation cryptoImpl;
     private static final String password = "1234567812345678";
     private static final String salt = "wTmg4qj8dNszs2ji";
     private static final String str = "test";
@@ -30,7 +28,7 @@ public class Test {
 
     // TEST ENCRYPTION
     private static void testStringEncrypt() throws Exception{
-        cryptoImpl = new CryptoImpl(str);
+        cryptoImpl = new CryptoImplementation(str);
         keyFile = new KeyFile(password, 1);
 //        keyFile.setSalt(salt);
         encrypted = cryptoImpl.encryptString(keyFile);

@@ -1,8 +1,9 @@
-package com.cypher.encryption.test;
-
 /**
  * Created by adlerd on 4/9/17.
  */
+
+import static java.lang.System.err;
+
 import java.security.InvalidKeyException;
 import java.security.Key;
 import javax.crypto.BadPaddingException;
@@ -10,16 +11,14 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.spec.SecretKeySpec;
 
-import static java.lang.System.*;
-
 public class TestAES
 {
-    String text = "Hello World";
-    String key = "Bar12345Bar12345"; // 128 bit key
+    private String text = "Hello World";
+    private String key = "Bar12345Bar12345"; // 128 bit key
     // Create key and cipher
-    Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-    Cipher cipher;
-    byte[] encrypted;
+    private Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+    private Cipher cipher;
+    private byte[] encrypted;
 
     private void run() {
         try {

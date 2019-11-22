@@ -7,3 +7,9 @@
                                                                                                    
 ```
 The Cypher Project... 
+
+## How to Run
+Run the following in a terminal in the root directory of the project:
+```shell script
+mvn javafx:run -f pom.xml
+```
